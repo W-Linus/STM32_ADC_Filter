@@ -25,7 +25,7 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-
+#include <math.h>
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -46,7 +46,7 @@
 
 /* USER CODE BEGIN PV */
 
-
+float RF_Power_Fwd=0;
 
 uint32_t ADC_Origin_Result[4]={0};
 uint32_t ADC_Kalman_Result[4]={0};
@@ -158,7 +158,10 @@ void SystemClock_Config(void)
 void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef *hadc){
   if(Filter(ADC_Origin_Result[2],&ADC_Kalman_Result[2]))
     HAL_GPIO_TogglePin(GPIOC,GPIO_PIN_13);
-    printf("ADC:%ld,%ld\r\n",ADC_Kalman_Result[2],ADC_Origin_Result[2]);
+    RF_Power_Fwd=pow(2.71828,((ADC_Kalman_Result[2]-2010.3)/92.108));
+        printf("Power_forward:%.2fW\r\n",RF_Power_Fwd);
+    //printf("ADC:%ld,%ld\r\n",ADC_Kalman_Result[2],ADC_Origin_Result[2]);
+
 }
 /* USER CODE END 4 */
 

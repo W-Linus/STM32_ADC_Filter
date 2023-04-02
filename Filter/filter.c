@@ -11,7 +11,7 @@ uint32_t filteredData;
 
 
 /// @brief 获取ADC原始值，将其填入待处理队列。队列满了以后对队列中数据进行快速排序
-/// @param data-ADC原始采样值
+/// @param data ADC原始采样值
 /// @return 队列是否已满
 uint8_t FilterDataAcquire(uint32_t data){
     if(filterCounter<FILTER_BUFFER_SIZE){
